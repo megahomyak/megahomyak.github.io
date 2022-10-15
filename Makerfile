@@ -1,0 +1,2 @@
+index.html: index.md
+	python "${ROOT}/converter.py"
