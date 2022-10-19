@@ -1,2 +1,2 @@
-index.html: index.md
-	python "${ROOT}/converter.py"
+index.html: index ${ROOT}/converter.py ${ROOT}/styles
+	poetry run python "${ROOT}/converter.py"
