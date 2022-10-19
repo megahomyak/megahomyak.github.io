@@ -65,15 +65,16 @@ def process():
 
     if markup_type == "markdown":
         body = markdown(contents)
-        if title is None:
-            title = re.search(r"# (.+)", contents)
-            if title is not None:
-                title = title.group(1)
     else:
         raise Exception("Unknown markup type")
+    soup = bs4.BeautifulSoup(body, features="html.parser")
 
     if title is None:
-        raise Exception("No title found")
+        title = soup.find(re.compile("^h[1-6]$"))
+        if title is not None:
+            title = title.text
+        else:
+            raise Exception("No title found")
 
     with open(os.path.join(root, "styles"), encoding="utf-8") as f:
         styles_string = (
@@ -88,7 +89,6 @@ def process():
             name, value = line.split("=", 1)
             styles.append((name.strip(), value.strip()))
 
-    soup = bs4.BeautifulSoup(body, features="html.parser")
     classes = set()
     tag_names = set()
     for element in soup.find_all():
