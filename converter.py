@@ -60,25 +60,6 @@ def process():
         re.DOTALL,
     )
 
-    def prepare_an_svg(match):
-        image_name = match.group(1)
-        with open(os.path.join(root, f"{image_name}.svg"), encoding="utf-8") as f:
-            svg = f.read()
-        svg_soup = bs4.BeautifulSoup(svg, features="lxml")
-        fill_color = tuple_to_hex_color(content_color)
-        for tag in svg_soup.find_all(fill=True):
-            tag.fill = fill_color
-        with open(os.path.join(root, f"{image_name}.{fill_color}"), "w", encoding="utf-8") as f:
-            f.write(svg_soup.get_text())
-        return f'<svg><use xlink:href="/images/{image_name}.{fill_color}"></use></svg>'
-
-    contents = re.sub(
-        r"<monochrome svg>(.+?)</svg>",
-        prepare_an_svg,
-        contents,
-        re.DOTALL,
-    )
-
     markup_type = tags["markup type"]
     title = tags.get("title")
 
