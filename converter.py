@@ -4,7 +4,7 @@ import os
 from markdown import markdown
 
 
-INPUT_NAME = "index"
+INPUT_NAME = "index.data"
 
 
 def process():
@@ -41,9 +41,9 @@ def process():
     background_color = parse_tuple(tags.get("background color")) or bias(
         main_color, +215
     )
-    text_color = parse_tuple(tags.get("paragraph color")) or bias(main_color, -50)
+    content_color = parse_tuple(tags.get("paragraph color")) or bias(main_color, -50)
 
-    if main_color is None and (background_color is None or text_color is None):
+    if main_color is None and (background_color is None or content_color is None):
         raise Exception("Colors are not set")
 
     contents = tags["contents"]
@@ -56,6 +56,25 @@ def process():
     contents = re.sub(
         r"<filler>(.+?)</filler>",
         r'<div class="tight centeredContents takesAllSpace"><p class="bigText tight">\1</p></div>',
+        contents,
+        re.DOTALL,
+    )
+
+    def prepare_an_svg(match):
+        image_name = match.group(1)
+        with open(os.path.join(root, f"{image_name}.svg"), encoding="utf-8") as f:
+            svg = f.read()
+        svg_soup = bs4.BeautifulSoup(svg, features="lxml")
+        fill_color = tuple_to_hex_color(content_color)
+        for tag in svg_soup.find_all(fill=True):
+            tag.fill = fill_color
+        with open(os.path.join(root, f"{image_name}.{fill_color}"), "w", encoding="utf-8") as f:
+            f.write(svg_soup.get_text())
+        return f'<svg><use xlink:href="/images/{image_name}.{fill_color}"></use></svg>'
+
+    contents = re.sub(
+        r"<monochrome svg>(.+?)</svg>",
+        prepare_an_svg,
         contents,
         re.DOTALL,
     )
@@ -76,11 +95,11 @@ def process():
         else:
             raise Exception("No title found")
 
-    with open(os.path.join(root, "styles"), encoding="utf-8") as f:
+    with open(os.path.join(root, "styles.data"), encoding="utf-8") as f:
         styles_string = (
             f.read()
             .replace("{background color in hex}", tuple_to_hex_color(background_color))
-            .replace("{text color in hex}", tuple_to_hex_color(text_color))
+            .replace("{text color in hex}", tuple_to_hex_color(content_color))
         )
 
     styles = []

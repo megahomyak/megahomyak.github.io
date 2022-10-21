@@ -5,13 +5,39 @@
 
 <slogan>Because even the greatest knowledge should be conveyed nicely.</slogan>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar convallis ante, eu maximus felis faucibus iaculis. Donec viverra mi quam, sed varius risus faucibus ut. Suspendisse turpis erat, varius eget porttitor et, faucibus sit amet risus. In hac habitasse platea dictumst. Integer posuere arcu nec erat vehicula, vitae mattis ante sodales. Donec tempus, est nec faucibus tristique, orci elit lacinia ex, sit amet vulputate dolor diam at nunc. In congue ligula non nulla tristique sagittis. Sed orci tellus, pellentesque sit amet placerat non, viverra non nisi. Nam pretium risus ac mi scelerisque, ut iaculis erat faucibus. Praesent vitae leo dictum, pellentesque ipsum at, pharetra sem. Vivamus suscipit mattis lectus nec vestibulum.
+This styleguide is not mandatory, and there may be some pages that don't obey it, but in general the rules will apply.
 
-Donec a lectus tortor. Aliquam nec massa at magna scelerisque vehicula ut sed mi. Vestibulum vitae posuere diam, nec dictum mi. Donec condimentum ut magna nec mattis. Nulla et efficitur purus, vel lobortis orci. Donec lobortis leo luctus, venenatis quam nec, semper mauris. Aliquam ultrices tincidunt eros, vitae euismod felis cursus in. Aenean semper dignissim massa et egestas. Duis rutrum tincidunt ex, eget sollicitudin libero hendrerit eget. Nunc lobortis pretium tellus, at porttitor magna viverra ac. Praesent egestas turpis at eros tincidunt condimentum. Phasellus congue purus varius mauris aliquam, in rutrum leo consequat. Aenean suscipit lobortis purus, ut sodales urna elementum et. Fusce semper suscipit placerat.
+## Textual
 
-Aenean a orci mi. Donec luctus felis at eros pharetra porttitor at quis orci. Sed dapibus imperdiet odio eget gravida. Curabitur et ultricies augue. Proin varius ligula tortor, in consectetur lacus laoreet dignissim. Nunc blandit nisl id lectus dignissim lobortis. Pellentesque at malesuada leo. Proin eget turpis purus. Maecenas vitae ullamcorper sem.
+Each heading should contain a button next to it to copy an anchored hyperlink:
 
-Cras ac velit bibendum, vestibulum mauris sed, eleifend enim. Integer maximus ultricies nisl sed euismod. Proin convallis mauris orci, facilisis iaculis ante porttitor at. Ut nec interdum sapien. Vestibulum pharetra mauris massa, vel commodo lorem dapibus eget. Donec suscipit, urna tristique fringilla tempor, sapien enim dictum elit, sed imperdiet mi tellus at felis. In fringilla facilisis lorem et tempor. Sed rhoncus velit elit, rhoncus bibendum dui posuere a. Proin cursus velit sem, eu varius augue ultricies euismod. Nunc feugiat metus sit amet consequat cursus. Mauris mauris urna, commodo sed erat ut, suscipit fringilla nibh. Suspendisse vestibulum risus non lacus scelerisque lacinia. Proin feugiat tristique mauris, vel laoreet nisi fringilla at.
+### This is a sample heading
 
-Sed ac euismod diam, in sagittis ipsum. Pellentesque nec tempus magna, at scelerisque tortor. Nam ante massa, dictum pretium blandit non, viverra nec turpis. Pellentesque eget purus in sapien pretium dignissim. In tempor odio lacus, vehicula malesuada nisl feugiat eu. Ut vitae sagittis quam, id tincidunt eros. Aliquam eu diam id mi venenatis congue. Mauris laoreet lorem lacus, at tristique massa sollicitudin a. Nam commodo velit vel lectus tristique facilisis. Morbi tempus magna enim, faucibus porttitor orci convallis sit amet. In mattis, neque eu fringilla iaculis, est mi egestas sapien, sit amet gravida lacus lorem vel lacus. Mauris vehicula, dolor in auctor feugiat, nisl mi volutpat lorem, quis laoreet velit sem at felis. Sed et sodales orci. Vivamus mattis vel massa eu facilisis. Etiam a porttitor neque.
+After the first heading defining the name of the webpage, a slogan should be located containing a phrase that unusually sums up the contents of the webpage:
+
+<slogan>Hi, I am a slogan. You've seen my sibling after the first heading of this page.</slogan>
+
+## Visual
+
+Each page should have a different color. The background of the page should be light, and the content should be dark. It can be seen on this page.
+
+<p>Thematic changes (<pre>&lt;br&gt;</pre> in HTML) should look like very bold, wavy lines going through the entire page horizontally:</p>
+
+<br>
+
+Vector images should be the same color as content, with rare exceptions:
+
+<centered monochrome svg>human_hands_up</svg>
+
+Vector images should be small and minimalistic.
+
+Characters on vector images should be limited to three emotions:
+
+<div class="tight centerContentsEvenly"><monochrome svg>happy</svg><monochrome svg>neutral</svg><monochrome svg>sad</svg></div>
+
+Adding unnecessary emotions on images or in text is considered bad and should be avoided.
+
+Each article should end with a vector image related to page's content:
+
+<centered monochrome svg>waves</svg>
 </>
