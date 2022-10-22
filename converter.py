@@ -61,7 +61,11 @@ def process():
     )
     contents = contents.replace(
         "{contact me}",
-        '<button class="contactMe"><img src="../telegram_logo.svg" alt="Telegram logo"><span>Contact me on Telegram</span></button>',
+        '<a href="https://t.me/megahomyak">contact me on Telegram</a>',
+    )
+    contents = contents.replace(
+        "{Contact me}",
+        '<a href="https://t.me/megahomyak">Contact me on Telegram</a>',
     )
 
     markup_type = tags["markup type"]
