@@ -59,6 +59,10 @@ def process():
         contents,
         re.DOTALL,
     )
+    contents = contents.replace(
+        "{contact me}",
+        '<button class="contactMe"><img src="../telegram_logo.svg" alt="Telegram logo"><span>Contact me on Telegram</span></button>',
+    )
 
     markup_type = tags["markup type"]
     title = tags.get("title")
@@ -100,10 +104,11 @@ def process():
 
     styles_list = []
     for name, value in styles:
+        trimmed_name = name.split(":")[0].split(">")[0].strip()
         if (
-            (name.startswith(".") and name[1:] in classes)
-            or name in tag_names
-            or name == "body"
+            (trimmed_name.startswith(".") and trimmed_name[1:] in classes)
+            or trimmed_name in tag_names
+            or trimmed_name == "body"
         ):
             styles_list.append(f"{name} {{{value}}}")
 
