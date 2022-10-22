@@ -97,25 +97,6 @@ def process():
             name, value = line.split("=", 1)
             styles.append((name.strip(), value.strip()))
 
-    classes = set()
-    tag_names = set()
-    for element in soup.find_all():
-        try:
-            classes.update(element["class"])
-        except KeyError:
-            pass
-        tag_names.add(element.name)
-
-    styles_list = []
-    for name, value in styles:
-        trimmed_name = name.split(":")[0].split(">")[0].strip()
-        if (
-            (trimmed_name.startswith(".") and trimmed_name[1:] in classes)
-            or trimmed_name in tag_names
-            or trimmed_name == "body"
-        ):
-            styles_list.append(f"{name} {{{value}}}")
-
     anchors = set()
 
     def escape_heading(text):
@@ -135,12 +116,37 @@ def process():
             else:
                 break
         anchors.add(anchor_name)
+        container = soup.new_tag("div")
+        container.attrs["class"] = ["headingContainer"]  # type: ignore
+        heading.attrs["class"] = ["tight"]
         link = soup.new_tag("a")
         link.attrs["href"] = "#" + anchor_name
+        link.append("[anchor]")
         heading.attrs["id"] = anchor_name
-        link.contents = heading.contents
-        heading.contents = [link]
+        heading.replace_with(container)
+        container.append(heading)
+        container.append(link)
     body = str(soup)
+
+    classes = set()
+    tag_names = set()
+    for element in soup.find_all():
+        try:
+            assert type(element.attrs["class"]) == list
+            classes.update(element.attrs["class"])
+        except KeyError:
+            pass
+        tag_names.add(element.name)
+
+    styles_list = []
+    for name, value in styles:
+        trimmed_name = name.split(":")[0].split(">")[0].strip()
+        if (
+            (trimmed_name.startswith(".") and trimmed_name[1:] in classes)
+            or trimmed_name in tag_names
+            or trimmed_name == "body"
+        ):
+            styles_list.append(f"{name} {{{value}}}")
 
     styles = "\n".join(styles_list)
 

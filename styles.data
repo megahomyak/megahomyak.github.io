@@ -17,3 +17,4 @@ body = margin: 0; padding: 10%; background-color: #{background color in hex};
 .contactMe > img, .contactMe > span = vertical-align: middle;
 .contactMe > span = font-weight: bold;
 .contactMe > img = height: 1em; margin-right: 5px;
+.headingContainer = display: flex; align-items: baseline;
