@@ -107,6 +107,32 @@ def process():
         ):
             styles_list.append(f"{name} {{{value}}}")
 
+    anchors = set()
+
+    def escape_heading(text):
+        text = re.sub(r"\s", "-", text)
+        text = re.sub("[^abcdefghijklmnopqrstuvwxyz1234567890]", "_", text.casefold())
+        return text
+
+    for heading in soup.find_all(re.compile("^h[1-6]$")):
+        escaped_name = escape_heading(heading.text)
+        anchor_number = 1
+        while True:
+            anchor_name = escaped_name
+            if anchor_number != 1:
+                anchor_name += f"-{anchor_number}"
+            if anchor_name in anchors:
+                anchor_number += 1
+            else:
+                break
+        anchors.add(anchor_name)
+        link = soup.new_tag("a")
+        link.attrs["href"] = "#" + anchor_name
+        heading.attrs["id"] = anchor_name
+        link.contents = heading.contents
+        heading.contents = [link]
+    body = str(soup)
+
     styles = "\n".join(styles_list)
 
     html = f"""<html><head><style>\n{styles.strip()}\n</style><title>{title.strip()}</title></head><body>\n{body.strip()}\n</body></html>"""
