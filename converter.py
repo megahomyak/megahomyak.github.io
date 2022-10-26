@@ -145,7 +145,7 @@ def process():
     styles = "\n".join(styles_list)
 
     html = (
-        "<html><head>"
+        "<!DOCTYPE html><html><head>"
             f"<style>\n{styles.strip()}\n</style>"
             f"<title>{title.strip()}</title>"
             '<meta name="viewport" content="width=device-width, initial-scale=1" />'
