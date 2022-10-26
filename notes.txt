@@ -1,2 +1,8 @@
 Task list:
 * why_free_money_related_advices_are_highly_likely_to_be_false
+
+SocHi value changers:
+* Multipliers: the more you have, the more you get
+* Adders: no matter how much do you have, you will get this amount
+* Subtractors: no matter how much do you have, you will lose this amount
+* Setters: no matter how much do you have, you will lose everything and get this amount

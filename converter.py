@@ -118,7 +118,7 @@ def process():
         anchors.add(anchor_name)
         container = soup.new_tag("div")
         container.attrs["class"] = ["headingContainer"]  # type: ignore
-        heading.attrs["class"] = ["tight"]
+        heading.attrs["class"] = ["heading"]
         link = soup.new_tag("a")
         link.attrs["href"] = "#" + anchor_name
         link.append("[anchor]")
@@ -140,13 +140,7 @@ def process():
 
     styles_list = []
     for name, value in styles:
-        trimmed_name = name.split(":")[0].split(">")[0].strip()
-        if (
-            (trimmed_name.startswith(".") and trimmed_name[1:] in classes)
-            or trimmed_name in tag_names
-            or trimmed_name == "body"
-        ):
-            styles_list.append(f"{name} {{{value}}}")
+        styles_list.append(f"{name} {{{value}}}")
 
     styles = "\n".join(styles_list)
 
