@@ -1,1 +1,1 @@
-source maker.sh && git push
+source maker.sh && git add . && git commit && git push
