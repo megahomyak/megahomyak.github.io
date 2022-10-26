@@ -144,7 +144,15 @@ def process():
 
     styles = "\n".join(styles_list)
 
-    html = f"""<html><head><style>\n{styles.strip()}\n</style><title>{title.strip()}</title></head><body>\n{body.strip()}\n</body></html>"""
+    html = (
+        "<html><head>"
+            f"<style>\n{styles.strip()}\n</style>"
+            f"<title>{title.strip()}</title>"
+            '<meta name="viewport" content="width=device-width, initial-scale=1" />'
+        "</head><body>"
+            f"\n{body.strip()}\n"
+        "</body></html>"
+    )
 
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(html)
