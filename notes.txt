@@ -6,3 +6,7 @@ SocHi value changers:
 * Adders: no matter how much do you have, you will get this amount
 * Subtractors: no matter how much do you have, you will lose this amount
 * Setters: no matter how much do you have, you will lose everything and get this amount
+
+The questions of /awareness/:
+* Why are some people destined to suffer and some are destined to strive?
+* What one needs to do if he's invaluable?
