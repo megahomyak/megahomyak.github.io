@@ -18,3 +18,6 @@ More topics, in order:
 * On vicious cycles
 * Why one's intentions only matter to oneself
 * Why centralized control is bad (since we can't know the real intentions EVER, it is easier to just throw a dice)
+
+"Making for the invaluable":
+    "Be aware that a lot of the invaluable people may have awful life conditions, so you should ideally think of sharing your product offline, since Internet access is still a privilege. Going for the illiterate people, though, is not something I would consider worthy. These are the people who suffer the most - yes, but reaching them is practically impossible."
