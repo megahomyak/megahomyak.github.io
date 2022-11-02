@@ -1,6 +1,9 @@
 Task list:
 * why_free_money_related_advices_are_highly_likely_to_be_false
 
+!!! THIS WILL BONK YOU IN THE FUTURE !!!
+    Check the links (including anchors) every time the site is rebuilt, so that there will be no broken ones, and refuse to compile if there are.
+
 SocHi value changers:
 * Multipliers: the more you have, the more you get
 * Adders: no matter how much do you have, you will get this amount

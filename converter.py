@@ -59,6 +59,12 @@ def process():
         contents,
         re.DOTALL,
     )
+    contents = re.sub(
+        r"<warning>(.+?)</warning>",
+        r"<fieldset><legend><strong>WARNING</strong></legend><p>\1</p></fieldset>",
+        contents,
+        re.DOTALL,
+    )
     contents = contents.replace(
         "{contact me}",
         '<a href="https://t.me/megahomyak">contact me on Telegram</a>',
