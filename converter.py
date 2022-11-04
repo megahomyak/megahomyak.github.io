@@ -22,7 +22,7 @@ def process():
     }
 
     def tuple_to_hex_color(seq):
-        return "".join(hex(int(max(0, min(n, 255))))[2:].rjust(2, "0") for n in seq)
+        return "".join(hex(n)[2:].rjust(2, "0") for n in seq)
 
     def defloat(seq):
         return list(map(int, seq))
@@ -31,12 +31,11 @@ def process():
         return list(map(lambda elem: elem * n, seq))
 
     def process_rgb(seq):
-        return defloat(mul_by(seq, 256))
+        return defloat(mul_by(seq, 255))
 
     contents = tags["contents"]
     contents_hash = hashlib.md5(contents.encode()).digest()
-    hue = round(int.from_bytes(contents_hash[-2:], "big", signed=False) / 65535, ndigits=2)
-    print(hue)
+    hue = int.from_bytes(contents_hash[-2:], "big", signed=False) / 65535
     background_color = process_rgb(colorsys.hls_to_rgb(hue, 0.90, 1))
     text_color = process_rgb(colorsys.hls_to_rgb(hue, 0.10, 1))
     contents = re.sub(
