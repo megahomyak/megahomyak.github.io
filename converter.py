@@ -34,10 +34,6 @@ def process():
         return defloat(mul_by(seq, 255))
 
     contents = tags["contents"]
-    contents_hash = hashlib.md5(contents.encode()).digest()
-    hue = int.from_bytes(contents_hash[-2:], "big", signed=False) / 65535
-    background_color = process_rgb(colorsys.hls_to_rgb(hue, 0.94, 1))
-    text_color = process_rgb(colorsys.hls_to_rgb(hue, 0.10, 1))
     contents = re.sub(
         r"<slogan>(.+?)</slogan>",
         r'<p class="horizontallyCentered"><em>\1</em></p>',
@@ -80,6 +76,11 @@ def process():
             title = title.text
         else:
             raise Exception("No title found")
+
+    title_hash = hashlib.md5(title.encode()).digest()
+    hue = int.from_bytes(title_hash[-2:], "big", signed=False) / 65535
+    background_color = process_rgb(colorsys.hls_to_rgb(hue, 0.94, 1))
+    text_color = process_rgb(colorsys.hls_to_rgb(hue, 0.10, 1))
 
     with open(os.path.join(root, "styles.data"), encoding="utf-8") as f:
         styles_string = (
