@@ -2,6 +2,8 @@ import re
 import bs4
 import os
 from markdown import markdown
+import hashlib
+import colorsys
 
 
 INPUT_NAME = "index.data"
@@ -19,34 +21,24 @@ def process():
         )
     }
 
-    def nullable(function):
-        def wrapper(*args, **kwargs):
-            if all(arg is not None for arg in args + tuple(kwargs.values())):
-                return function(*args, **kwargs)
-
-        return wrapper
-
-    @nullable
-    def parse_tuple(s):
-        return tuple(map(int, s.split()))
-
-    @nullable
-    def bias(seq, n):
-        return tuple(map(lambda i: i + n, seq))
-
     def tuple_to_hex_color(seq):
         return "".join(hex(int(max(0, min(n, 255))))[2:].rjust(2, "0") for n in seq)
 
-    main_color = parse_tuple(tags.get("main color"))
-    background_color = parse_tuple(tags.get("background color")) or bias(
-        main_color, +215
-    )
-    content_color = parse_tuple(tags.get("paragraph color")) or bias(main_color, -50)
+    def defloat(seq):
+        return list(map(int, seq))
 
-    if main_color is None and (background_color is None or content_color is None):
-        raise Exception("Colors are not set")
+    def mul_by(seq, n):
+        return list(map(lambda elem: elem * n, seq))
+
+    def process_rgb(seq):
+        return defloat(mul_by(seq, 256))
 
     contents = tags["contents"]
+    contents_hash = hashlib.md5(contents.encode()).digest()
+    hue = round(int.from_bytes(contents_hash[-2:], "big", signed=False) / 65535, ndigits=2)
+    print(hue)
+    background_color = process_rgb(colorsys.hls_to_rgb(hue, 0.90, 1))
+    text_color = process_rgb(colorsys.hls_to_rgb(hue, 0.10, 1))
     contents = re.sub(
         r"<slogan>(.+?)</slogan>",
         r'<p class="horizontallyCentered"><em>\1</em></p>',
@@ -94,7 +86,7 @@ def process():
         styles_string = (
             f.read()
             .replace("{background color in hex}", tuple_to_hex_color(background_color))
-            .replace("{text color in hex}", tuple_to_hex_color(content_color))
+            .replace("{text color in hex}", tuple_to_hex_color(text_color))
         )
 
     styles = []
