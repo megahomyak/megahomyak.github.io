@@ -137,7 +137,8 @@ def process():
 
     styles_list = []
     for name, value in styles:
-        styles_list.append(f"{name} {{{value}}}")
+        if (name.startswith(".") and name[1:] in classes) or (name in tag_names) or (name == "body"):
+            styles_list.append(f"{name} {{{value}}}")
 
     styles = "\n".join(styles_list)
 
