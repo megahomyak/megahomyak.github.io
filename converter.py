@@ -36,7 +36,7 @@ def process():
     contents = tags["contents"]
     contents_hash = hashlib.md5(contents.encode()).digest()
     hue = int.from_bytes(contents_hash[-2:], "big", signed=False) / 65535
-    background_color = process_rgb(colorsys.hls_to_rgb(hue, 0.90, 1))
+    background_color = process_rgb(colorsys.hls_to_rgb(hue, 0.94, 1))
     text_color = process_rgb(colorsys.hls_to_rgb(hue, 0.10, 1))
     contents = re.sub(
         r"<slogan>(.+?)</slogan>",
