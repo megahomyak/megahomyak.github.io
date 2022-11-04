@@ -37,3 +37,6 @@ A context (the in-theory term) is a set of human occupations. TODO!!!
 
 After some time, the gap between the valuable and invaluable becomes so big that there is no hope left for the invaluable to be useful.
 </text>
+
+One of the tips for the invaluable:
+    Don't make far plans, because reality is not in your control and your ability to do what you have planned will highly likely disappear after some time
