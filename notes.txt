@@ -31,7 +31,7 @@ SHT briefly, unfinished draft:
 <text>
 Society is a group of people who use each other. We are existing now because our main goals are replication and survival, which are regulated by our instincts, and everything else builds on top. Since our primary goals are about ourselves, we are selfish, so when we choose people to use, we choose the best ones.
 
-People are born with different talents (and different levels of those talents; there may be the case when a person has no talents at all or the case when a person is extremely talented in a lot of contexts), and help with development to become even better are getting only the best ones, the worst ones will have no help at all and have to go alone all the time. The talented are usually successful, and since they're good, they're good as a tool, including breeding. After they have kids (also genetically talented, from the highly likely talented both parents, since it is unprofitable for the talented to use the untalented for breeding), they will make their already talented kids even better by helping them become better, so they will have an even greater boost than their parents.
+People are born with different talents (and different levels of those talents; there may be the case when a person has no talents at all or the case when a person is extremely talented in a lot of contexts), and help with development to become even better are getting only the best ones, the worst ones will have no help at all and have to go alone all the time. The talented are usually successful, and since they're good, they're good as a tool, including mating. After they have kids (also genetically talented, from the highly likely talented both parents, since it is unprofitable for the talented to use the untalented for mating), they will make their already talented kids even better by helping them become better, so they will have an even greater boost than their parents.
 
 A context (the in-theory term) is a set of human occupations. TODO!!!
 
@@ -40,3 +40,7 @@ After some time, the gap between the valuable and invaluable becomes so big that
 
 One of the tips for the invaluable:
     Don't make far plans, because reality is not in your control and your ability to do what you have planned will highly likely disappear after some time
+
+!!! TRANSHUMANISM TO RESCUE THE GENETICALLY BAD !!!
+
+Talk about the implications of having bad genes. Mention that the mating instincts work everywhere for everyone, not only when one wants to mate (and can), and provide the cliff-hanger solution to fill out in a couple next years (don't mention the term). Mention that mating is a context that is used in many other contexts, and in every situation, maybe even implicitly (=not thinking about it), people tend to prioritize the ones with good genes and downplay the ones with bad genes, resulting in injustice. Don't try to make it look like "we're doomed forever" to make a nice delivery of the solution afterwards, tell people to help with solution creation (and for that there *may* still be some extra dramatization, so that the people will be more involved in the process).
