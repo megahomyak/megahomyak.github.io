@@ -13,11 +13,11 @@ def process():
     root = os.environ["ROOT"]
 
     with open(INPUT_NAME, encoding="utf-8") as f:
-        contents = f.read()
+        file_contents = f.read()
     tags = {
         tag_name.casefold(): tag_contents.strip()
         for tag_name, tag_contents in re.findall(
-            r"\<(?P<tag_name>.+?)\>(?P<tag_contents>.*?)\</\>", contents, re.DOTALL
+            r"\<(?P<tag_name>.+?)\>(?P<tag_contents>.*?)\</\>", file_contents, re.DOTALL
         )
     }
 
@@ -33,7 +33,11 @@ def process():
     def process_rgb(seq):
         return defloat(mul_by(seq, 255))
 
-    contents = tags["contents"]
+    if not tags:
+        # If there are no tags, assuming that the body is the contents
+        contents = file_contents
+    else:
+        contents = tags["contents"]
     contents = re.sub(
         r"<slogan>(.+?)</slogan>",
         r'<p class="horizontallyCentered"><em>\1</em></p>',
@@ -61,7 +65,7 @@ def process():
         '<a href="https://t.me/megahomyak">Contact me on Telegram</a>',
     )
 
-    markup_type = tags["markup type"]
+    markup_type = tags.get("markup type", "markdown").casefold()  # Defaulting to Markdown
     title = tags.get("title")
 
     if markup_type == "markdown":
