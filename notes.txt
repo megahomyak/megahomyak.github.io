@@ -48,3 +48,5 @@ Talk about the implications of having bad genes. Mention that the mating instinc
 !!! SHT: DO NOT FORGET TO COME TO A CONCLUSION THAT OUR LIVES ARE DETERMINED BY LUCK !!!
 
 "It is better to be silent than to lie" (alternative title: "silence is better than lies") -- probably add this to `random_thoughts/why_being_silent_is_a_good_strategy/`
+
+* "How to spend time efficiently" [big long action, small long action and nothing more; context changes every time a person sleeps; context changes take time]
