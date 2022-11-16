@@ -10,7 +10,9 @@
     <warning>
         Warnblah
     </warning>
-    <link destination="../relative/or/absolute/path/to/article/from/root#optional_section">Link text</link>
+    <inner-link destination="../relative/or/absolute/path/to/article/from/root#optional_section">Link text</inner-link>
+    <!-- Inner links will be validated -->
+    <outer-link destination="https://t.me/megahomyak">Contact me on Telegram<outer-link>
     <list>
         <list_item></list_item>
         <list_item></list_item>
