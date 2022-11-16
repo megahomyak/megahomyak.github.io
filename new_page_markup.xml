@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section id="first_section">
+    <heading>First section heading</heading>
+    <slogan>Page slogan</slogan>
+    A paragraph without the tag.
+    A paragraph cannot be inside another paragraph.
+    <paragraph>
+        Blah <emphasis>blah</emphasis> <strong>blah</strong>
+    </paragraph>
+    <warning>
+        Warnblah
+    </warning>
+    <link destination="../relative/or/absolute/path/to/article/from/root#optional_section">Link text</link>
+    <list>
+        <list_item></list_item>
+        <list_item></list_item>
+    </list>
+    <section id="second_section" unproven="true">
+        <!-- Depends on first_section implicitly -->
+        <heading>Second section heading</heading>
+        <!-- When converting to HTML, this section's heading would be `h2` -->
+    </section>
+    <section id="third_section">
+        <dependencies>
+            <dependency>.#second_section</dependency>
+            <dependency>../another_article#some_section</dependency>
+        </dependencies>
+        <!-- Implicitly unproven, because `second_section` is unproven -->
+</section>
