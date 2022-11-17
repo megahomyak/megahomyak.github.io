@@ -17,7 +17,7 @@
         <list_item></list_item>
         <list_item></list_item>
     </list>
-    <section id="second_section" unproven="true">
+    <section id="second_section" proof_value="unproven">
         <!-- Depends on first_section implicitly -->
         <heading>Second section heading</heading>
         <!-- When converting to HTML, this section's heading would be `h2` -->
