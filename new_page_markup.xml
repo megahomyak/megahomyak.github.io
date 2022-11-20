@@ -5,7 +5,7 @@
     A paragraph without the tag.
     A paragraph cannot be inside another paragraph.
     <paragraph>
-        Blah <emphasis>blah</emphasis> <strong>blah</strong>
+        Blah <emphasized>blah</emphasized> <strong>blah</strong>
     </paragraph>
     <warning>
         Warnblah
