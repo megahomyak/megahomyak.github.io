@@ -1,28 +1,17 @@
-pub enum CreationError {
-    StringIsEmpty,
-}
+pub struct StringIsEmpty;
 
-pub struct FilledString(String);
+pub struct NonEmptyString(String);
 
-impl FilledString {
-    pub fn new(origin: String) -> Result<Self, (CreationError, String)> {
+impl NonEmptyString {
+    pub fn new(origin: String) -> Result<Self, (StringIsEmpty, String)> {
         if origin.len() == 0 {
-            Err(Creat)
-        }
-        let chars = origin.chars();
-        let capture = Capture::new(origin);
-        if let Some(c) = chars.next() {
-            if c.is_whitespace() {
-                capture.error(CreationError::StringBeginsWithWhitespace)
-            } else {
-                if chars.last().map_or(false, |c| c.is_whitespace()) {
-                    capture.error(CreationError::StringEndsWithWhitespace)
-                } else {
-                    Ok(Self(origin))
-                }
-            }
+            Err((StringIsEmpty, origin))
         } else {
-            capture.error(CreationError::StringIsEmpty)
+            Ok(Self(origin))
         }
+    }
+
+    pub fn contents(&self) -> &str {
+        &self.0
     }
 }
