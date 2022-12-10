@@ -1,13 +1,8 @@
-pub struct Capture<Input> {
-    input: Input,
-}
+/// Made for less repetition in functions that return their input on error
+pub struct Capture<T>(pub T);
 
-impl<Input> Capture<Input> {
-    pub fn new(input: Input) -> Capture<Input> {
-        Capture { input }
-    }
-
-    pub fn error<Ok, Error>(self, error: Error) -> Result<Ok, (Error, Input)> {
-        Err((error, self.input))
+impl<T> Capture<T> {
+    pub fn err<E, R>(self, err: E) -> Result<R, (E, T)> {
+        Err((err, self.0))
     }
 }

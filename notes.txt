@@ -50,3 +50,16 @@ Talk about the implications of having bad genes. Mention that the mating instinc
 "It is better to be silent than to lie" (alternative title: "silence is better than lies") -- probably add this to `random_thoughts/why_being_silent_is_a_good_strategy/`
 
 * "How to spend time efficiently" [big long action, small long action and nothing more; context changes every time a person sleeps; context changes take time]
+
+"How to find a good price for selling the thing":
+    min_price = ... // "I will not sell for that little"
+    max_price = ... // "Nobody will buy it for that much"
+    loop:
+        selling_price = (min_price + max_price) / 2
+        if people_are_buying(selling_price):
+            selling_price = (selling_price + max_price) / 2
+        else:
+            selling_price = (min_price + selling_price) / 2
+-- This thing should be the most quick way to find out whether the price is good if one cannot look at an enough big group of others selling the same thing
+
+VERY IMPORTANT: "Why every society will become selfish overtime" ("eat or be eaten" + natural selection)

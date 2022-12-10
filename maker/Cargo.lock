@@ -12,6 +12,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "html-builder"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "82ac906c24b99b5884b512a5d202d69a674ed27e349f332ae6e5d63e3845697a"
+
+[[package]]
 name = "idna"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -25,6 +31,7 @@ dependencies = [
 name = "maker"
 version = "0.1.0"
 dependencies = [
+ "html-builder",
  "url",
  "walkdir",
  "xmltree",
