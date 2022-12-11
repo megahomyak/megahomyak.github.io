@@ -97,6 +97,10 @@ pub struct List {
     contents: Vec<Paragraph>,
 }
 
+pub struct Set {
+    contents: Vec<Paragraph>,
+}
+
 pub struct Association {
     information: Paragraph,
     visualization: NonEmpty<Vec<Image>>,
@@ -111,6 +115,7 @@ pub enum BlockElement {
     Paragraph(Paragraph),
     Section(Section<BlockElement>),
     List(List),
+    Set(Set),
     Association(Association),
     Warning(Warning),
     WarningForNewcomers,
