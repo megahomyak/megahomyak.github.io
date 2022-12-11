@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use crate::{context::Context, special_types::non_empty::NonEmpty};
 
 use html_builder::Html5;
@@ -119,6 +121,14 @@ pub enum BlockElement {
     Association(Association),
     Warning(Warning),
     WarningForNewcomers,
+}
+
+pub struct Catalog {
+    input_directory: PathBuf,
+    id: Identifier,
+    title: Text,
+    slogan: Option<Slogan>,
+    description: NonEmpty<Vec<BlockElement>>,
 }
 
 pub struct Article {
