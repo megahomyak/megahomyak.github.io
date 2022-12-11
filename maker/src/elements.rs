@@ -86,7 +86,7 @@ pub enum InlineElement {
     Text(Text),
     Code(Code),
     Section(Section<InlineElement>),
-    Macro(Macro),
+    ContactMe,
 }
 
 pub struct Paragraph {
@@ -99,16 +99,11 @@ pub struct List {
 
 pub struct Association {
     information: Paragraph,
-    visualization: Image,
+    visualization: NonEmpty<Vec<Image>>,
 }
 
-pub enum MacroKind {
-    WarningForNewcomers,
-    ContactMe,
-}
-
-pub struct Macro {
-    kind: MacroKind,
+pub struct Warning {
+    text: Text,
 }
 
 pub enum BlockElement {
@@ -117,7 +112,8 @@ pub enum BlockElement {
     Section(Section<BlockElement>),
     List(List),
     Association(Association),
-    Macro(Macro),
+    Warning(Warning),
+    WarningForNewcomers,
 }
 
 pub struct Article {
