@@ -1,18 +1,18 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, path::PathBuf};
 
-use crate::{
-    elements,
-    special_types::{
-        self, existing_path::ExistingPath, identifier::Identifier, read_only::ReadOnly,
-    },
-};
+use crate::special_types::{read_only::ReadOnly, identifier::Identifier, non_empty::NonEmpty};
 
-pub enum Article {
-    Invalid(elements::Article),
-    Valid(special_types::valid_article::ValidArticle),
+pub struct ImageInfo {
+    path: PathBuf,
+    absolute_description: NonEmpty<String>,
 }
 
 pub struct Context {
-    image_paths: ReadOnly<HashMap<Identifier, ExistingPath>>,
-    articles: HashMap<Identifier, Article>,
+    images: ReadOnly<HashMap<Identifier, ImageInfo>>,
+}
+
+impl Context {
+    pub fn images(&self) -> &ReadOnly<HashMap<Identifier, ImageInfo>> {
+        &self.images
+    }
 }

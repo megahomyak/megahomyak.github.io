@@ -1,5 +1,6 @@
 use crate::utils::capture::Capture;
 
+#[derive(Eq, PartialEq, Hash)]
 pub struct Identifier(String);
 
 pub enum CreationError {

@@ -2,7 +2,6 @@ use std::path::PathBuf;
 
 use crate::{context::Context, special_types::non_empty::NonEmpty};
 
-use html_builder::Html5;
 use url::Url;
 
 use crate::{
@@ -40,10 +39,13 @@ pub struct Image {
     contextual_description: Option<Text>,
 }
 
+pub enum IntoHtmlConversionError {}
+
 impl ToHtml for Image {
-    fn to_html(&self, buffer: html_builder::Buffer, context: Context) {
-        buffer.img().attr("src=''")
-    }
+    type Error = IntoHtmlConversionError;
+    type Context = Context;
+
+    fn to_html(&self, context: Self::Context) -> Result<build_html::Container, Self::Error> {}
 }
 
 pub struct OuterReference {

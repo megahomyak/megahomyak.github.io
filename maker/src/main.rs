@@ -6,7 +6,6 @@ mod context;
 
 use std::path::PathBuf;
 
-use elements::Article;
 use walkdir::WalkDir;
 
 pub struct ArticleData {

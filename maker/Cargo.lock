@@ -3,6 +3,12 @@
 version = 3
 
 [[package]]
+name = "build_html"
+version = "2.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f3ef018b44d829e1b3364b4969059c098743595ec57a7eed176fbc9d909ac217"
+
+[[package]]
 name = "form_urlencoded"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -31,6 +37,7 @@ dependencies = [
 name = "maker"
 version = "0.1.0"
 dependencies = [
+ "build_html",
  "html-builder",
  "url",
  "walkdir",

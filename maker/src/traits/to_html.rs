@@ -1,5 +1,6 @@
-use crate::context::Context;
-
 pub trait ToHtml {
-    fn to_html(&self, buffer: html_builder::Buffer, context: Context);
+    type Context;
+    type Error;
+
+    fn to_html(&self, context: Self::Context) -> Result<build_html::Container, Self::Error>;
 }
