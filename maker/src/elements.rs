@@ -18,6 +18,15 @@ pub enum Truthfulness {
     Unknown,
 }
 
+// Truthfulness of a section should be derived from the references and subsections located inside
+// the section under discussion, and if nothing to derive from was found, a default value should be
+// used.
+impl Default for Truthfulness {
+    fn default() -> Self {
+        Self::Unknown
+    }
+}
+
 pub enum ProgrammingLanguage {
     Rust,
     Python,
@@ -123,14 +132,20 @@ pub enum BlockElement {
     WarningForNewcomers,
 }
 
+// A catalog should *not* have an ID because it will not be linked internally and only the links to
+// the compiled representation should be used for outer linking.
 pub struct Catalog {
     input_directory: PathBuf,
-    id: Identifier,
     title: Text,
     slogan: Option<Slogan>,
     description: NonEmpty<Vec<BlockElement>>,
 }
 
+// A very important detail: any webpage generated must not contain any interactive elements, so it
+// can be printed on paper. There should also be "print versions" linked on every page (or only
+// every article?) containing the same information as their web counterparts, but black and white
+// and with less fancy things such as links (even those going to the same webpage (in-place anchors
+// included)) and big outer margins.
 pub struct Article {
     id: Identifier,
     title: Text,
