@@ -3,12 +3,6 @@
 version = 3
 
 [[package]]
-name = "build_html"
-version = "2.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f3ef018b44d829e1b3364b4969059c098743595ec57a7eed176fbc9d909ac217"
-
-[[package]]
 name = "form_urlencoded"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -18,10 +12,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "html-builder"
-version = "0.4.0"
+name = "html-escape"
+version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "82ac906c24b99b5884b512a5d202d69a674ed27e349f332ae6e5d63e3845697a"
+checksum = "15315cfa9503e9aa85a477138eff76a1b203a430703548052c330b69d8d8c205"
+dependencies = [
+ "utf8-width",
+]
 
 [[package]]
 name = "idna"
@@ -34,11 +31,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "indoc"
+version = "1.0.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "adab1eaa3408fb7f0c777a73e7465fd5656136fc93b670eb6df3c88c2c1344e3"
+
+[[package]]
 name = "maker"
 version = "0.1.0"
 dependencies = [
- "build_html",
- "html-builder",
+ "html-escape",
+ "indoc",
  "url",
  "walkdir",
  "xmltree",
@@ -99,6 +102,12 @@ dependencies = [
  "idna",
  "percent-encoding",
 ]
+
+[[package]]
+name = "utf8-width"
+version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5190c9442dcdaf0ddd50f37420417d219ae5261bbf5db120d0f9bab996c9cba1"
 
 [[package]]
 name = "walkdir"

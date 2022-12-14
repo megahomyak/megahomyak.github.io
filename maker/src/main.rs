@@ -1,20 +1,13 @@
-mod special_types;
-mod elements;
-mod utils;
-mod traits;
 mod context;
-
-use std::path::PathBuf;
+mod elements;
+mod html;
+mod special_types;
+mod utils;
 
 use walkdir::WalkDir;
 
-pub struct ArticleData {
-    path: PathBuf,
-    contents: Article,
-}
-
 fn main() {
-    for entry in WalkDir::new(".").into_iter().map(|entry| entry.unwrap()) {
-        let root = xmltree::Element::parse(std::fs::File::open(entry.path()).unwrap());
+    for entry in WalkDir::new(".").into_iter().map(Result::unwrap) {
+        let root = xmltree::Element::parse(std::fs::File::open(entry.path()).unwrap()).unwrap();
     }
 }

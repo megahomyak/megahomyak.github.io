@@ -1,19 +1,26 @@
-use std::path::PathBuf;
+use std::{
+    collections::HashMap,
+    path::PathBuf,
+};
 
-use crate::{context::Context, special_types::non_empty::NonEmpty};
+use crate::{
+    context::Context,
+    html::{ElementKind, Node, Style, StylesCollectionError},
+    special_types::{
+        css_declaration_block::CssDeclarationBlock, html_class_name::HtmlClassName,
+        html_escaped_string::HtmlEscapedString, html_tag_name::HtmlTagName, non_empty::NonEmpty,
+    },
+};
 
 use url::Url;
 
-use crate::{
-    special_types::{identifier::Identifier, slogan::Slogan},
-    traits::to_html::ToHtml,
-};
+use crate::special_types::{identifier::Identifier, slogan::Slogan};
 
 // Note: an article should not be written to be false. If something is needed to be negated, it is
 // convenient to add negation to the article itself.
 pub enum Truthfulness {
-    False,
-    True,
+    AssumedToBeFalse,
+    AssumedToBeTrue,
     Unknown,
 }
 
@@ -31,21 +38,12 @@ pub enum ProgrammingLanguage {
     Python,
     /// A programming language that was made up
     Pseudo,
-    HTML,
+    Html,
 }
 
 pub struct Image {
     id: Identifier,
     contextual_description: Option<Text>,
-}
-
-pub enum IntoHtmlConversionError {}
-
-impl ToHtml for Image {
-    type Error = IntoHtmlConversionError;
-    type Context = Context;
-
-    fn to_html(&self, context: Self::Context) -> Result<build_html::Container, Self::Error> {}
 }
 
 pub struct OuterReference {
@@ -134,6 +132,12 @@ pub enum BlockElement {
     WarningForNewcomers,
 }
 
+impl BlockElement {
+    pub fn to_html(self) -> ! {
+        todo!()
+    }
+}
+
 // A catalog should *not* have an ID because it will not be linked internally and only the links to
 // the compiled representation should be used for outer linking.
 pub struct Catalog {
@@ -153,4 +157,78 @@ pub struct Article {
     title: Text,
     slogan: Option<Slogan>,
     contents: NonEmpty<Vec<BlockElement>>,
+    truthfulness: Option<Truthfulness>,
+}
+
+/// An error that occurs when converting an Article to HTML.
+pub enum HtmlConversionError {
+    Collision { class_name: HtmlClassName },
+}
+
+impl Article {
+    pub fn to_html(self, context: Context) -> Result<String, HtmlConversionError> {
+        let body = Node::Element {
+            style: Some(Style {
+                class_name: HtmlClassName::new("body").unwrap(),
+                declaration_block: CssDeclarationBlock::new_unchecked(
+                    "margin: 0; padding: 10%; background-color: #{background color in hex}; \
+                    color: #{text color in hex}; word-wrap: anywhere; font-family: sans-serif;",
+                ),
+            }),
+            attributes: HashMap::new(),
+            name: HtmlTagName::new("body".to_string()).unwrap(),
+            kind: ElementKind::Filled {
+                contents: self
+                    .contents
+                    .deconstruct()
+                    .into_iter()
+                    .map(|block_element| block_element.to_html())
+                    .collect(),
+            },
+        };
+        let styles = match body.get_styles_recursively() {
+            Ok(styles) => styles,
+            Err(error) => match error {
+                StylesCollectionError::Collision { class_name } => {
+                    return Err(HtmlConversionError::Collision { class_name })
+                }
+            },
+        };
+        let head = Node::Element {
+            style: None,
+            attributes: HashMap::new(),
+            name: HtmlTagName::new("head".to_string()).unwrap(),
+            kind: ElementKind::Filled {
+                contents: vec![Node::Element {
+                    style: None,
+                    attributes: HashMap::new(),
+                    name: HtmlTagName::new("style".to_string()).unwrap(),
+                    kind: ElementKind::Filled {
+                        contents: vec![Node::Text(HtmlEscapedString::convert(
+                            styles
+                                .iter()
+                                .map(|(class_name, declaration_block)| {
+                                    format!(
+                                        ".{} {{{}}}",
+                                        class_name.contents(),
+                                        declaration_block.contents()
+                                    )
+                                })
+                                .collect::<Vec<String>>()
+                                .join("\n"),
+                        ))],
+                    },
+                }],
+            },
+        };
+        let html = Node::Element {
+            style: None,
+            attributes: HashMap::new(),
+            name: HtmlTagName::new("html".to_string()).unwrap(),
+            kind: ElementKind::Filled {
+                contents: vec![head, body],
+            },
+        };
+        return Ok("<!DOCTYPE html>\n".to_owned() + &html.compile());
+    }
 }

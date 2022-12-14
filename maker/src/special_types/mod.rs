@@ -1,6 +1,9 @@
 pub mod identifier;
 pub mod slogan;
-pub mod existing_file;
-pub mod valid_article;
 pub mod read_only;
 pub mod non_empty;
+pub mod html_escaped_string;
+pub mod html_attribute_name;
+pub mod html_tag_name;
+pub mod html_class_name;
+pub mod css_declaration_block;

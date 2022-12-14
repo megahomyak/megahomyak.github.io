@@ -21,16 +21,20 @@ impl<T: MayBeEmpty> NonEmpty<T> {
     pub fn contents(&self) -> &T {
         &self.0
     }
+
+    pub fn deconstruct(self) -> T {
+        self.0
+    }
 }
 
 impl<T> MayBeEmpty for Vec<T> {
     fn is_empty(&self) -> bool {
-        Vec::is_empty(self)
+        self.is_empty()
     }
 }
 
 impl MayBeEmpty for String {
     fn is_empty(&self) -> bool {
-        String::is_empty(self)
+        self.is_empty()
     }
 }
