@@ -1,7 +1,7 @@
-use std::{collections::HashMap, fmt::format};
+use std::collections::HashMap;
 
 use crate::special_types::{
-    css_declaration_block::CssDeclarationBlock, html_attribute_name::HtmlAttributeName,
+    css_declaration_block::CssDeclarationBlock, html_attributes::HtmlAttributes,
     html_class_name::HtmlClassName, html_escaped_string::HtmlEscapedString,
     html_tag_name::HtmlTagName,
 };
@@ -19,7 +19,7 @@ pub enum ElementKind {
 pub enum Node {
     Element {
         style: Option<Style>,
-        attributes: HashMap<HtmlAttributeName, Option<HtmlEscapedString>>,
+        attributes: HtmlAttributes,
         name: HtmlTagName,
         kind: ElementKind,
     },
@@ -37,10 +37,11 @@ impl Node {
             Self::Element {
                 name,
                 kind,
-                style: _,
+                style,
                 attributes,
             } => {
                 let attributes: String = attributes
+                    .deconstruct()
                     .into_iter()
                     .map(|(k, v)| {
                         if let Some(v) = v {
@@ -52,7 +53,17 @@ impl Node {
                     .collect();
 
                 let textual_representation = {
-                    let mut parts = Vec::from([format!("<{}{}>", name.contents(), attributes)]);
+                    let mut parts = Vec::from([{
+                        match style {
+                            Some(style) => format!(
+                                "<{}{} class=\"{}\">",
+                                name.contents(),
+                                attributes,
+                                style.class_name.contents()
+                            ),
+                            None => format!("<{}{}>", name.contents(), attributes),
+                        }
+                    }]);
 
                     match kind {
                         ElementKind::Empty => (),
@@ -107,59 +118,71 @@ impl Node {
 
 #[cfg(test)]
 mod tests {
+    use crate::special_types::html_attribute_name::HtmlAttributeName;
+
     use super::*;
 
     use indoc::indoc;
 
     #[test]
     fn test_complex_tree_generation() {
-        assert_eq!(
-            Node::Element {
-                name: HtmlTagName::new("div".to_string()).unwrap(),
-                attributes: HashMap::new(),
-                style: None,
-                kind: ElementKind::Filled {
-                    contents: vec![
-                        Node::Element {
-                            style: None,
-                            attributes: HashMap::new(),
-                            name: HtmlTagName::new("p".to_string()).unwrap(),
-                            kind: ElementKind::Filled {
-                                contents: vec![
-                                    Node::Text(HtmlEscapedString::convert("Hello".to_string())),
-                                    Node::Element {
-                                        style: None,
-                                        attributes: HashMap::new(),
-                                        name: HtmlTagName::new("br".to_string()).unwrap(),
-                                        kind: ElementKind::Empty
-                                    },
-                                    Node::Text(HtmlEscapedString::convert("world".to_string()))
-                                ]
-                            }
+        let compiled_complex_tree = Node::Element {
+            name: HtmlTagName::new("div".to_string()).unwrap(),
+            attributes: HtmlAttributes::new(),
+            style: Some(Style {
+                class_name: HtmlClassName::new("classname").unwrap(),
+                declaration_block: CssDeclarationBlock::new_unchecked("blahblah"),
+            }),
+            kind: ElementKind::Filled {
+                contents: vec![
+                    Node::Element {
+                        style: None,
+                        attributes: HtmlAttributes::new(),
+                        name: HtmlTagName::new("p".to_string()).unwrap(),
+                        kind: ElementKind::Filled {
+                            contents: vec![
+                                Node::Text(HtmlEscapedString::convert("Hello".to_string())),
+                                Node::Element {
+                                    style: None,
+                                    attributes: HtmlAttributes::new(),
+                                    name: HtmlTagName::new("br".to_string()).unwrap(),
+                                    kind: ElementKind::Empty,
+                                },
+                                Node::Text(HtmlEscapedString::convert("world".to_string())),
+                            ],
                         },
-                        Node::Element {
-                            style: None,
-                            attributes: HashMap::from([
-                                (
-                                    HtmlAttributeName::new("src".to_string()).unwrap(),
-                                    Some(HtmlEscapedString::convert("image.png".to_string()))
-                                ),
-                                (
-                                    HtmlAttributeName::new("alt".to_string()).unwrap(),
-                                    Some(HtmlEscapedString::convert(
-                                        "Image description".to_string()
-                                    ))
+                    },
+                    Node::Element {
+                        style: None,
+                        attributes: {
+                            let mut attributes = HtmlAttributes::new();
+                            attributes
+                                .insert(
+                                    HtmlAttributeName::new("src").unwrap(),
+                                    Some(HtmlEscapedString::convert("image.png".to_string())),
                                 )
-                            ]),
-                            name: HtmlTagName::new("img".to_string()).unwrap(),
-                            kind: ElementKind::Empty
-                        }
-                    ]
-                }
-            }
-            .compile(),
-            indoc! {r#"
-                <div>
+                                .unwrap();
+                            attributes
+                                .insert(
+                                    HtmlAttributeName::new("alt").unwrap(),
+                                    Some(HtmlEscapedString::convert(
+                                        "Image description".to_string(),
+                                    )),
+                                )
+                                .unwrap();
+                            attributes
+                        },
+                        name: HtmlTagName::new("img".to_string()).unwrap(),
+                        kind: ElementKind::Empty,
+                    },
+                ],
+            },
+        }
+        .compile();
+        assert!(
+            compiled_complex_tree
+                == indoc! {r#"
+                <div class="classname">
                     <p>
                         Hello
                         <br>
@@ -167,7 +190,19 @@ mod tests {
                     </p>
                     <img src="image.png" alt="Image description">
                 </div>"#}
-            .to_string()
+                .to_string()
+                || compiled_complex_tree
+                    == indoc! {r#"
+                <div class="classname">
+                    <p>
+                        Hello
+                        <br>
+                        world
+                    </p>
+                    <img alt="Image description" src="image.png">
+                </div>"#},
+            "compiled_complex_tree = {}",
+            compiled_complex_tree
         );
     }
 }

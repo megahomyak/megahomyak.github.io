@@ -1,14 +1,12 @@
-use std::{
-    collections::HashMap,
-    path::PathBuf,
-};
+use std::{collections::HashMap, path::PathBuf};
 
 use crate::{
     context::Context,
     html::{ElementKind, Node, Style, StylesCollectionError},
     special_types::{
-        css_declaration_block::CssDeclarationBlock, html_class_name::HtmlClassName,
-        html_escaped_string::HtmlEscapedString, html_tag_name::HtmlTagName, non_empty::NonEmpty,
+        css_declaration_block::CssDeclarationBlock, html_attributes::HtmlAttributes,
+        html_class_name::HtmlClassName, html_escaped_string::HtmlEscapedString,
+        html_tag_name::HtmlTagName, non_empty::NonEmpty,
     },
 };
 
@@ -175,7 +173,7 @@ impl Article {
                     color: #{text color in hex}; word-wrap: anywhere; font-family: sans-serif;",
                 ),
             }),
-            attributes: HashMap::new(),
+            attributes: HtmlAttributes::new(),
             name: HtmlTagName::new("body".to_string()).unwrap(),
             kind: ElementKind::Filled {
                 contents: self
@@ -196,12 +194,12 @@ impl Article {
         };
         let head = Node::Element {
             style: None,
-            attributes: HashMap::new(),
+            attributes: HtmlAttributes::new(),
             name: HtmlTagName::new("head".to_string()).unwrap(),
             kind: ElementKind::Filled {
                 contents: vec![Node::Element {
                     style: None,
-                    attributes: HashMap::new(),
+                    attributes: HtmlAttributes::new(),
                     name: HtmlTagName::new("style".to_string()).unwrap(),
                     kind: ElementKind::Filled {
                         contents: vec![Node::Text(HtmlEscapedString::convert(
@@ -223,7 +221,7 @@ impl Article {
         };
         let html = Node::Element {
             style: None,
-            attributes: HashMap::new(),
+            attributes: HtmlAttributes::new(),
             name: HtmlTagName::new("html".to_string()).unwrap(),
             kind: ElementKind::Filled {
                 contents: vec![head, body],

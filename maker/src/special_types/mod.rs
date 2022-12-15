@@ -7,3 +7,4 @@ pub mod html_attribute_name;
 pub mod html_tag_name;
 pub mod html_class_name;
 pub mod css_declaration_block;
+pub mod html_attributes;
