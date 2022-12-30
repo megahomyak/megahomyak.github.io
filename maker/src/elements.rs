@@ -62,7 +62,7 @@ pub struct InnerReference {
 pub enum TextPart {
     Plain(NonEmpty<String>),
     Emphasized(NonEmpty<Vec<TextPart>>),
-    StronglyEmphasized(NonEmpty<Vec<TextPart>>),
+    Important(NonEmpty<Vec<TextPart>>),
     InnerReference(InnerReference),
     OuterReference(OuterReference),
 }
