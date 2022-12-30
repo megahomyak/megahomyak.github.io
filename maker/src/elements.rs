@@ -20,15 +20,7 @@ pub enum Truthfulness {
     AssumedToBeFalse,
     AssumedToBeTrue,
     Unknown,
-}
-
-// Truthfulness of a section should be derived from the references and subsections located inside
-// the section under discussion, and if nothing to derive from was found, a default value should be
-// used.
-impl Default for Truthfulness {
-    fn default() -> Self {
-        Self::Unknown
-    }
+    DetermineByContent,
 }
 
 pub enum ProgrammingLanguage {
@@ -88,7 +80,7 @@ pub struct Section<ContentType> {
     id: Identifier,
     title: Option<Text>,
     contents: NonEmpty<Vec<ContentType>>,
-    truthfullness: Option<Truthfulness>,
+    truthfullness: Truthfulness,
 }
 
 pub enum InlineElement {
@@ -155,7 +147,7 @@ pub struct Article {
     title: Text,
     slogan: Option<Slogan>,
     contents: NonEmpty<Vec<BlockElement>>,
-    truthfulness: Option<Truthfulness>,
+    truthfulness: Truthfulness,
 }
 
 /// An error that occurs when converting an Article to HTML.
