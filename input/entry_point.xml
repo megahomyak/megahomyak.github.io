@@ -1,0 +1,13 @@
+<catalog>
+    <id>entry point</id>
+    <title>megahomyak's blog</title>
+    <filters>
+        <tags>
+            <tag>important</tag>
+        </tags>
+    </filters>
+    <slogan>Perpetual dread.</slogan>
+    <description>
+        <warning_for_newcomers />
+    </description>
+</catalog>
