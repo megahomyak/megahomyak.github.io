@@ -4,7 +4,7 @@
         <script>
             function phisnomify() {
                 let text = document.getElementById("text");
-                let output = text.value.replace(/(\w+)(s)\w*/gi, "$1$2nom");
+                let output = text.value.replace(/(\w+?)(s)\w*/gi, "$1$2nom");
                 document.getElementById("output").innerText = output;
             }
         </script>
