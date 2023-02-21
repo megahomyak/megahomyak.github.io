@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function philify() {
+                let text = document.getElementById("text");
+                let output = text.value.replace(/f/gi, "Ph");
+                document.getElementById("output").innerText = output;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Philification</h1>
+        <textarea id="text" style="display:block"></textarea>
+        <button type="button" onclick="philify()">Philify!</button>
+        <p id="output"></p>
+    </body>
+</html>
