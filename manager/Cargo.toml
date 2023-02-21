@@ -1,5 +1,5 @@
 [package]
-name = "maker"
+name = "manager"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,6 +7,6 @@ edition = "2021"
 
 [dependencies]
 html-escape = "0.2.12"
-url = "2.3.1"
+nxml = "1.4.0"
+thiserror = "1.0.38"
 walkdir = "2.3.2"
-xmltree = "0.10.3"
