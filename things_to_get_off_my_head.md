@@ -24,6 +24,7 @@ Subjects to explain:
 * How to make a human do anything
 * An observation: [make a section for observations?] opinions of overpowered people are believed instantly, whilst the opinions of underpowered people are never considered [maybe, this should be in a more general article?]
 * What to do in life if you are underpowered
+* Why trusting is a big mistake [will it be really that abstract? The topics I need to cover: you shouldn't trust an informational resource (a person or other entity) just because "they *X*", you must require proof and this proof should be really, really good; the second topic is about that you shouldn't trust with your time, personal information and stuff alike - treat strangers like strangers. As far as they haven't done anything that is *surely* resource-consuming, you shouldn't do anything back to them that consumes your resources (and in any situation, you shouldn't invest much more resources than the other party, resource spendings must grow gradually on one side after another)]
 
 Topics to bring up in a more generic fashion:
 * Why looking like a child will make people treat you like one no matter your age
@@ -34,10 +35,11 @@ Sections to add:
 * The resume (projects list goes here)
 * Self-dialogue
 
-Other services to do:
+Other services to do (with respective articles):
 * No-coin
 * Nothing-ism
 * Imaginary Worlds
+* Personality Splitter
 
 Terms to explain (in *articles*, no need for another representation in my context):
 * "Wrong human"
