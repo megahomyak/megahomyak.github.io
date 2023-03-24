@@ -8,6 +8,7 @@ Subjects to touch:
 * Why am I against violence
 * Why market economy is unfair, but also is the most fitting economic system for humanity
 * How to make your work valued as an underpowered person
+* How to make your child miserable (please, don't do it)
 
 Sections to add:
 * The resume (projects list goes here)
