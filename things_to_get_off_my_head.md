@@ -9,6 +9,7 @@ Subjects to touch:
 * Why market economy is unfair, but also is the most fitting economic system for humanity
 * How to make your work valued as an underpowered person
 * How to make your child miserable (please, don't do it)
+* How to interact with people [talk about when the reader is starting the interaction and about when others start it]
 
 Sections to add:
 * The resume (projects list goes here)
