@@ -10,6 +10,7 @@ Subjects to touch:
 * How to make your work valued as an underpowered person
 * How to make your child miserable (please, don't do it)
 * How to interact with people [talk about when the reader is starting the interaction and about when others start it]
+* How to make a human do anything
 
 Sections to add:
 * The resume (projects list goes here)
