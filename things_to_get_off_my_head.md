@@ -12,6 +12,9 @@ Subjects to touch:
 * How to interact with people [talk about when the reader is starting the interaction and about when others start it]
 * How to make a human do anything
 
+Topics to bring up in a more generic fashion:
+* Why looking like a child will make people treat you like one no matter your age
+
 Sections to add:
 * The resume (projects list goes here)
 * Self-dialogue
