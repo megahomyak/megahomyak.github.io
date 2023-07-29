@@ -1,0 +1,27 @@
+[topic[
+    [identifier[entry point]]
+    [title[megahomyak's place]]
+    [contents[
+        [welcoming[
+            Hello and welcome!
+            [explanation[Here, you will find my thoughts on various subjects, my creative works and much more.]]
+            [providing a choice[
+                [invitation for making a choice[question[What do you want to see?]]]
+                [options[
+                    [reference[
+                        [topic]
+
+                    ]]
+                    [about to my works[
+                        [option description[]]
+                        [option name[My works]]
+                        [reference[
+                            [topic[identifier[my works]]]
+                            [content[]]
+                        ]]
+                    ]]
+                ]]
+            ]]
+        ]]
+    ]]
+]]
