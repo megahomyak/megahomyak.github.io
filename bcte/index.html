@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bitwise Cyclic Tag Executor @ megahomyak.github.io</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1>BCTE</h1>
+            <img alt="An overview screenshot of the mechanism" src="images/overview.jpeg">
+            <p>"BCTE" means "<a href="https://esolangs.org/wiki/Bitwise_Cyclic_Tag">Bitwise Cyclic Tag</a> Executor". It is a Minecraft build that can execute a variant of Bitwise Cyclic Tag (modified to fit into size limitations). Bitwise Cyclic Tag is <a href="https://en.wikipedia.org/wiki/Turing_completeness">Turing-complete</a>, which means that it <em>theoretically allows to calculate anything.</em></p>
+            <p>BCTE (not BCT!) was made by megahomyak. BCT was made by <a href="https://esolangs.org/wiki/R.e.s.">r.e.s.</a></p>
+            <p><strong>BCTE is not a regular personal computer!</strong> It does not have a screen, a keyboard or something like that. It cannot move blocks or interact with players while the program is running. It only has one program string and one string of data it operates on. But hey, now you can easily build a Turing-complete computer in survival mode!</p>
+            <h2>Differences between BCT and BCTE</h2>
+                <p>The data bits are inverted in BCTE. The commands function in the same way, but when filling the data string or reading it, be mindful that all the bits are inverted.</p>
+            <h2>How to build (in layers)</h2>
+                <h3>Before we begin: be mindful of where the hoppers point</h3>
+                    <p>Hopper direction is of utmost importance. If a hopper is pointing in a wrong direction, the mechanism is likely to break in a very subtle way. Here are the screenshots of where the hoppers should point, be sure to place yours accordingly:</p>
+                    <img alt="Upper hopper placement" src="images/upper_hopper_placement.jpeg">
+                    <img alt="Lower hopper placement" src="images/lower_hopper_placement.jpeg">
+                    <img alt="Data string hopper placement" src="images/data_string_hopper_placement.jpeg">
+                <h3>Clearing space for the build</h3>
+                    <p>The base stage: clear enough space for the build. You'll need a space that's 9 blocks long, 4 blocks wide and 6 blocks high.</p>
+                    <img alt="A screenshot of the first stage" src="images/stages/1.jpeg">
+                <h3>Layer 1</h3>
+                    <img alt="A screenshot of the second stage" src="images/stages/2.jpeg">
+                <h3>Layer 2</h3>
+                    <p>Don't put anything into containers yet. You'll do that later.</p>
+                    <img alt="A screenshot of the third stage" src="images/stages/3.jpeg">
+                <h3>Layer 3</h3>
+                    <p>Keep in mind that you need to set the comparators to the right modes. This is very important for the executor to function properly.</p>
+                    <img alt="A screenshot of the fourth stage" src="images/stages/4.jpeg">
+                <h3>Layer 4</h3>
+                    <img alt="A screenshot of the fifth stage" src="images/stages/5.jpeg">
+                <h3>Layer 5</h3>
+                    <p>Again, don't forget about comparator modes.</p>
+                    <img alt="A screenshot of the sixth stage" src="images/stages/6.jpeg">
+                <h3>Layer 6</h3>
+                    <img alt="A screenshot of the seventh stage" src="images/stages/7.jpeg">
+                <p>And please, keep in mind: not only barrels can be used as containers. Any container is permissible as long as it is not interfering with the machine.</p>
+            <h2>How to use</h2>
+                <p>Keep in mind: stackable items are "0", while non-stackable items are "1".</p>
+                <h3>Data preparation</h3>
+                    <p>Since BCT only has a data string and a program string, you'll only need to prepare these.</p>
+                    <h4>The data string</h4>
+                        <p>The first bit of the data string is located in the respectively titled hopper shown in the image below. Keep in mind that the <em>data string</em> bits are inverted in BCTE, meaning that a "0" in BCT is a "1" in BCTE and vice versa.</p>
+                        <p>Put the remaining bits into the container above the hopper designated for the first bit. The items should be placed in the order the hopper will retrieve them in, i.e. starting with the topmost leftmost cell, going to the right a cell at a time and going to the next row after the rightmost cell, just how you usually read English text.</p>
+                        <p>Be sure to fill the data string droppers with the appropriate items before running the program, so that adding to the data string will work. When filling the dropper with stackable items, make sure the items are unique so they don't stack with each other anywhere later. This preserves bit order. For non-stackable items you can just use wooden shovels, they seem to be the cheapest.</p>
+                        <p>Automatic dropper refill was implemented, but was cut to save size. I can add it here if you want. It is actually pretty small, but increases the bounds of the box the mechanism can be contained in.</p>
+                        <p>If you want to store more items in the data string, tinker with hoppers a little: you'll need more storage for the data string, for the droppers and for the container for used bits.</p>
+                        <img alt="The data string part of the mechanism, annotated" src="images/data_string.jpeg">
+                    <h4>The program string</h4>
+                        <p>While the data string bits are inverted, the program string bits are not. The program bits are identical to BCT.</p>
+                        <p>The program string will begin executing as soon as you place an item in the top container. Please, don't drop them just in order: both bits of a "10" or a "11" sequence <strong>must</strong> be placed into the container at the same time, because the mechanism relies on hopper timings when reading sequences of two bits. Sorry. This wacky implementation was made to save some more space, I couldn't make up anything better. Ideally, you should lock the hopper below the container before putting your items into the container (for example, place a redstone block near the hopper in such a way that it does not touch any other part of the mechanism), or use a shulker box for a container (and fill it preemptively).</p>
+                        <p>The items in the input should be placed in the order you have them in your program, no need to rearrange anything.</p>
+                        <p>All the bits sucked from the container above (the cycle input container) will be placed into the container below (the cycle output container) in the same order they were in the input. That's one cycle. In order to have the program cycle more times, place the items from the output container into the input container again (preserving their order).</p>
+                        <p>Automatic cycling was not implemented to reduce the size of the mechanism, but it is doable. I can implement this if you ask me (and if I will have enough time for this).</p>
+                        <p>If you want to increase storage, just point a bigger container into the cycle input hopper and have a bigger container collect items from the cycle output hopper. Just don't accidentally put a container above other hoppers or have these other hoppers point into one of your extra containers.</p>
+                        <img alt="The program string part of the mechanism, annotated" src="images/program_string.jpeg">
+                <h3>Running</h3>
+                    <ol>
+                        <li>Fill the data string</li>
+                        <li>Fill the program string</li>
+                        <li>Unlock the cycle input hopper or place the shulker on the cycle input hopper</li>
+                        <li>Wait for the first cycle to complete</li>
+                        <li>Run other cycles if necessary (by placing items from the cycle output back into the cycle input in the same order)</li>
+                    </ol>
+                <h3>Reading the results</h3>
+                    <p>Look at the first data bit hopper and at the container that's above it. It will contain your resulting data string. Don't forget that data string bits in BCTE are inverted, so if your BCT result is "100110", your BCTE result is going to be "011001".</p>
+            <h2>Running a test program</h2>
+                <p>Let's take the <a href="https://esolangs.org/wiki/Bitwise_Cyclic_Tag#Example_(simple_illustration)">"simple illustration" from the Esolang wiki</a>. I don't want to run it fully, but just the beginning of it to show off the machine.</p>
+                <ol>
+                    <li>Fill the data string droppers</li>
+                    <li>Lock the cycle input hopper</li>
+                    <li>Put "1011110" (1 non-stackable, 1 stackable, 4 non-stackable, 1 stackable) into the cycle input container</li>
+                    <li>Put "1" (1 non-stackable) into the first data bit hopper</li>
+                    <li>Unlock the cycle input hopper</li>
+                    <li>Wait for the cycle to complete (the cycle is complete when all the items have arrived into the cycle output container)</li>
+                    <li>Check the data string hopper and container: the hopper should contain a "0" (1 non-stackable), while the container above it should contain "11" (2 stackable), giving us the result of "011", just like in the wiki</li>
+                </ol>
+                <p>And there it is! The program had successfully executed and had given us the correct result. If you want, you can try visualizing the result of any program by piping all the bits into some reader that will project the bits on a lamp display. This will allow you to draw images using this thing! If you will be able to handle it, of course. The system is extremely hard to use.</p>
+        <p>Adios!</p>
+    </body>
+</html>
